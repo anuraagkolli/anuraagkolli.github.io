@@ -8,10 +8,9 @@ const AnimatedNumbers = dynamic(() => {
 }, { ssr: false });
 
 const achievementsList = [
-  { metric: "Projects", value: "100", postfix: "+" },
-  { prefix: "~", metric: "Users", value: "100,000" },
-  { metric: "Awards", value: "7" },
-  { metric: "Years", value: "5" },
+  { metric: "Projects", value: "10", postfix: "+" },
+  { metric: "Awards", value: "3" },
+  { metric: "Years", value: "7" },
 ];
 
 const AchievementsSection = () => {

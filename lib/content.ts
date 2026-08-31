@@ -41,7 +41,7 @@ export const work: Entry[] = [
   },
   {
     name: "Mercor",
-    lines: ["Engineering Project Manager"],
+    lines: ["EPM"],
     dates: ["2026"],
   },
   {

@@ -1,5 +1,6 @@
+import Link from "next/link"
 import { icons } from "@/components/icons"
-import { profile, social } from "@/lib/content"
+import { nav, profile, social } from "@/lib/content"
 
 export default function SiteHeader() {
   return (
@@ -8,9 +9,18 @@ export default function SiteHeader() {
         className="font-ui"
         style={{ fontWeight: 700, fontSize: 20, lineHeight: 1.05, letterSpacing: "-0.01em" }}
       >
-        {profile.name}
+        <Link href="/" className="hover:opacity-70">
+          {profile.name}
+        </Link>
       </h1>
       <div className="pt-2 text-gray-500">{profile.tagline}</div>
+      <nav className="ui flex gap-4 pt-3 text-gray-500">
+        {nav.map(({ label, href }) => (
+          <Link key={label} href={href} className="prose-link">
+            {label}
+          </Link>
+        ))}
+      </nav>
       <div className="pt-3">
         <div className="flex items-center gap-4">
           {social.map(({ label, href, tip }) => {

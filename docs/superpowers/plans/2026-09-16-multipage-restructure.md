@@ -22,6 +22,7 @@ A single `DetailPage` component renders any entry's `detail` field, so the four 
 - Every figure in the copy must come from `public/Anuraag_2026_Resume.pdf`, the BriefCase report, or the BriefCase eval JSONs. Invent no numbers.
 - Copy is short and numbers-forward. No filler adjectives.
 - Verification for every task is `npm run lint && npm run build`, plus the stated assertions against `out/`.
+- Paragraph arrays (`detail.body`, `aboutBio`) are static module constants that are never reordered, filtered, or mutated. Render them with the array index as the React key. This is deliberate, not an oversight.
 
 ---
 
@@ -484,11 +485,16 @@ The social icon block below is unchanged.
 
 ```bash
 npm run lint && npm run build
-grep -o 'href="/about/"' out/index.html | head -1
-grep -o 'href="/projects/"' out/index.html | head -1
+grep -q '<nav[^>]*>.*href="/about/".*href="/projects/".*</nav>' out/index.html \
+  && echo "ok: nav row rendered" || echo "FAIL: nav row missing"
+for route in kleiner-perkins mercor toyota; do :; done
+grep -q '<nav' out/index.html && echo "ok: nav present" || echo "FAIL: no nav element"
 ```
 
-Expected: lint and build pass; both greps print one match.
+Expected: lint and build pass, then two `ok:` lines.
+
+Note: do not verify the nav by grepping for a bare `href="/projects/"`.
+Task 1 already emits that href on the three project rows, so such a check passes whether or not the nav row exists.
 
 - [ ] **Step 3: Commit**
 
@@ -550,8 +556,8 @@ export default function DetailPage({
           </h2>
           <div className="ui pt-1 text-gray-500">{detail.meta}</div>
 
-          {detail.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)} className="pt-5" style={{ lineHeight: 1.6 }}>
+          {detail.body.map((paragraph, i) => (
+            <p key={i} className="pt-5" style={{ lineHeight: 1.6 }}>
               {paragraph}
             </p>
           ))}
@@ -714,8 +720,8 @@ export default function Page() {
                 </SectionHeading>
                 <div className="ui pt-2 text-gray-500">{detail.meta}</div>
 
-                {detail.body.map((paragraph) => (
-                  <p key={paragraph.slice(0, 40)} className="pt-5" style={{ lineHeight: 1.6 }}>
+                {detail.body.map((paragraph, i) => (
+                  <p key={i} className="pt-5" style={{ lineHeight: 1.6 }}>
                     {paragraph}
                   </p>
                 ))}
@@ -810,8 +816,8 @@ export default function Page() {
             back
           </Link>
 
-          {aboutBio.map((paragraph) => (
-            <p key={paragraph.slice(0, 40)} className="pt-6" style={{ lineHeight: 1.6 }}>
+          {aboutBio.map((paragraph, i) => (
+            <p key={i} className="pt-6" style={{ lineHeight: 1.6 }}>
               {paragraph}
             </p>
           ))}

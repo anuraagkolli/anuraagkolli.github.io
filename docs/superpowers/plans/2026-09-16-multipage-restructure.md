@@ -778,11 +778,23 @@ Expected: build passes, then eight `ok:` lines.
 - [ ] **Step 3: Confirm no invented number slipped into GARCH BTC**
 
 ```bash
-grep -A2 "GJR-GARCH" out/projects/index.html | grep -Eq '[0-9]+(\.[0-9]+)?%|macro-F1|MSE of' \
-  && echo "CHECK: verify any figure near GARCH BTC is sourced" || echo "ok: GARCH BTC stays qualitative"
+python3 - <<'EOF'
+import re, pathlib
+src = pathlib.Path("lib/content.ts").read_text()
+i = src.index('name: "GARCH BTC"')
+block = src[i:src.index("export const education", i)]
+body = block[block.index("body: ["):block.index("links:")]
+# Strip model names that legitimately contain digits, then look for figures.
+prose = body.replace("GARCH(1,1)", "GARCH").replace("LSTM", "").replace("1,1", "")
+hits = re.findall(r"\d+(?:\.\d+)?\s*(?:%|x\b|GPU-hours|macro-F1|points)", prose)
+print("CHECK: figures found near GARCH BTC:", hits) if hits else print("ok: GARCH BTC stays qualitative")
+EOF
 ```
 
 Expected: `ok: GARCH BTC stays qualitative`.
+
+Check the TypeScript source, not the built HTML.
+Next minifies the exported page onto very few lines, so `grep -A2` over `out/projects/index.html` spans unrelated sections and reports figures belonging to Invariance and BriefCase as though they sat beside GARCH BTC.
 
 - [ ] **Step 4: Commit**
 

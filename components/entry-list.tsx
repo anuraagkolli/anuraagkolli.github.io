@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Entry } from "@/lib/content"
 
 /**
@@ -6,10 +7,29 @@ import type { Entry } from "@/lib/content"
  * stacked layout below the `sm` breakpoint, where the dates move under the name.
  */
 function Row({ entry }: { entry: Entry }) {
+  const className =
+    "ui row col-span-3 block sm:grid sm:grid-cols-subgrid sm:items-baseline sm:gap-x-6"
+
+  if (entry.href) {
+    return (
+      <Link href={entry.href} className={className}>
+        <RowBody entry={entry} />
+      </Link>
+    )
+  }
+
+  return (
+    <div className={className}>
+      <RowBody entry={entry} />
+    </div>
+  )
+}
+
+function RowBody({ entry }: { entry: Entry }) {
   const [lead, ...rest] = entry.lines
 
   return (
-    <div className="ui row col-span-3 block sm:grid sm:grid-cols-subgrid sm:items-baseline sm:gap-x-6">
+    <>
       <span className="hidden font-medium sm:block sm:col-start-1">{entry.name}</span>
 
       <span className="hidden flex-col sm:flex sm:col-start-2" style={{ lineHeight: "26px" }}>
@@ -19,7 +39,7 @@ function Row({ entry }: { entry: Entry }) {
             {line}
           </span>
         ))}
-        {entry.links && <Links entry={entry} />}
+        {entry.links && <Links entry={entry} suppressed={Boolean(entry.href)} />}
       </span>
 
       <span
@@ -44,14 +64,15 @@ function Row({ entry }: { entry: Entry }) {
               {line}
             </span>
           ))}
-          {entry.links && <Links entry={entry} />}
+          {entry.links && <Links entry={entry} suppressed={Boolean(entry.href)} />}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
-function Links({ entry }: { entry: Entry }) {
+function Links({ entry, suppressed }: { entry: Entry; suppressed?: boolean }) {
+  if (suppressed) return null
   return (
     <span className="flex gap-x-4 pt-1">
       {entry.links?.map((link) => (

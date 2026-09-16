@@ -13,7 +13,7 @@ The opening animation on that site is explicitly out of scope.
 
 | Route | Contents |
 |---|---|
-| `/` | Site header, intro paragraph, bitter-lesson chart, Sutton paragraph, "Selected work" list of three clickable rows, link to projects |
+| `/` | Site header, intro paragraph, bitter-lesson chart, Sutton paragraph, "Selected work" list of three clickable rows, "Projects" list of three rows all pointing at `/projects/` |
 | `/about/` | Longer personal bio, education, skills |
 | `/kleiner-perkins/` | 2026 Kleiner Perkins Engineering Fellow, including the Inkitt placement |
 | `/mercor/` | EPM |
@@ -67,6 +67,7 @@ Each of the four detail routes is then a three-line file that imports its entry 
 This keeps every detail page visually identical by construction rather than by discipline.
 
 `EntryList`'s `Row` renders as a `Link` when `entry.href` is set and a `div` otherwise.
+The three project rows on the home page all set `href` to `/projects/`, so the whole group reads as clickable and lands on the shared page.
 The `a.row:hover` rule already present in `globals.css` supplies the hover treatment, so no new styles are needed for the clickable state.
 
 ## Copy
@@ -132,7 +133,12 @@ If final results surface later, they can be added without restructuring the entr
 
 ### About
 
-The longer personal bio, plus the education and skills content moved off the home page unchanged.
+Education and skills move off the home page unchanged, reusing `EntryList` and `Skills` as they stand.
+
+Above them sits a bio of two short paragraphs that the home page has no room for.
+The first covers the non-work half of the existing About section on the old site: photography, basketball, skiing.
+The second states what he is looking for next.
+This is the only genuinely new prose in the project; everything else is condensed from existing sources.
 
 ## Out of scope
 

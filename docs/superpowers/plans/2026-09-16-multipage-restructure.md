@@ -665,10 +665,18 @@ grep -q "Inkitt" out/kleiner-perkins/index.html && echo "ok: Inkitt on the KP pa
 Expected: build passes, then six `ok:` lines.
 
 ```bash
-grep -q "Inkitt" out/index.html && echo "FAIL: Inkitt leaked onto home" || echo "ok: Inkitt only on KP page"
+grep -qE "revenue prediction|recommendation engine|pLTV|Galatea|CandyJar" out/index.html \
+  && echo "FAIL: Inkitt narrative leaked onto home" || echo "ok: Inkitt narrative only on KP page"
+grep -q "placed at Inkitt" out/index.html \
+  && echo "ok: home row still points at Inkitt as context" || echo "FAIL: row subtitle lost"
 ```
 
-Expected: `ok: Inkitt only on KP page`.
+Expected: two `ok:` lines.
+
+Do not assert that the bare string "Inkitt" is absent from the home page.
+The Kleiner Perkins row carries the subtitle "2026 Engineering Fellow, placed at Inkitt", which is a pointer, not a narrative.
+The spec requires that Inkitt stop being a top-level work entry and that it be discussed on the Kleiner Perkins page.
+Naming it as context on the row it belongs to satisfies both, and tells the reader what the row is before they click.
 
 - [ ] **Step 5: Commit**
 

@@ -6,9 +6,8 @@ export default function Bio() {
       <p style={{ lineHeight: 1.6 }}>
         I&apos;m a 2026 Kleiner Perkins Fellow studying artificial intelligence and computer science
         at Purdue. I like the parts nobody demos: the eval harness, the retraining schedule, the
-        guardrail that catches the model before a user does. I spent this past summer at Inkitt
-        training revenue prediction models and rebuilding a recommendation engine, and before that
-        built internal AI infrastructure at Toyota.
+        guardrail that catches the model before a user does. The work below is where that has led
+        so far.
       </p>
 
       <figure className="my-6 flex justify-center">

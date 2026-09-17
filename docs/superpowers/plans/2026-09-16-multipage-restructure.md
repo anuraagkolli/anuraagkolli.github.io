@@ -931,28 +931,58 @@ Expected: build passes, then six `ok:` lines and no `FAIL:`.
 
 - [ ] **Step 3: Verify all six routes exist and nothing is orphaned**
 
-```bash
-for route in "" about projects kleiner-perkins mercor toyota; do
-  path="out/$route/index.html"
-  path="${path//\/\//\/}"
-  test -f "$path" && echo "ok: /$route/" || echo "FAIL: /$route/ missing"
-done
-```
-
-Expected: six `ok:` lines.
-
-Check every internal link resolves to an exported file:
+Run this from the repo root after the build. It replaces the earlier shell version, which had two defects: the `${path//\/\//\/}` normalization does not collapse the empty route under zsh, and the `href` regex silently skipped bare `href="/"` and every asset link.
 
 ```bash
-grep -oh 'href="/[a-z-]*/"' out/*.html out/*/*.html | sort -u | while read -r h; do
-  route=$(echo "$h" | sed 's|href="/||; s|/"||')
-  target="out/${route}/index.html"
-  [ -z "$route" ] && target="out/index.html"
-  test -f "$target" && echo "ok: /$route/" || echo "FAIL: dead link /$route/"
-done
+python3 - <<'EOF'
+import pathlib, re, sys
+
+OUT = pathlib.Path("out")
+EXPECTED = ["", "about", "projects", "kleiner-perkins", "mercor", "toyota"]
+fails = []
+
+def page(route):
+    return OUT / "index.html" if route == "" else OUT / route / "index.html"
+
+print("=== six routes exported ===")
+for route in EXPECTED:
+    p = page(route)
+    if p.is_file():
+        print(f"ok: /{route}/" if route else "ok: /")
+    else:
+        fails.append(f"route /{route}/ missing ({p})")
+        print(f"FAIL: /{route}/ missing")
+
+print("=== internal links resolve ===")
+targets = set()
+for html in OUT.rglob("*.html"):
+    text = html.read_text(encoding="utf-8", errors="replace")
+    for href in re.findall(r'href="(/[^"#?]*)"', text):
+        targets.add(href)
+
+for href in sorted(targets):
+    if re.search(r"\.[a-z0-9]+$", href):        # an asset, e.g. /resume.pdf
+        p = OUT / href.lstrip("/")
+    else:                                        # a route
+        p = OUT / href.strip("/") / "index.html" if href != "/" else OUT / "index.html"
+    if p.is_file():
+        print(f"ok: {href}")
+    else:
+        fails.append(f"dead link {href} (expected {p})")
+        print(f"FAIL: dead link {href}")
+
+print()
+if fails:
+    print(f"{len(fails)} FAILURE(S):")
+    for f in fails:
+        print("  -", f)
+    sys.exit(1)
+print("all site checks passed")
+EOF
 ```
 
-Expected: only `ok:` lines.
+Expected: six `ok:` route lines, an `ok:` line for every internal link including both PDFs, and `all site checks passed`.
+This check covers the home route and asset links, so there is no longer an accepted gap for bare `href="/"`.
 
 - [ ] **Step 4: Check for em dashes across the site**
 

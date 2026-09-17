@@ -48,7 +48,15 @@
   }
 
   .row {
-    @apply rounded-md px-3 py-3.5 transition-colors;
+    @apply rounded-md px-3 py-4 transition-colors;
+  }
+
+  /* The name is the line that carries a row; the date and tag stay quiet. */
+  .row-name {
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--offblack);
   }
 
   a.row:hover {
@@ -147,9 +155,46 @@
     }
   }
 
-  /* Hovering a hint in the prose fades the curve it is not talking about. */
+  /* A fat invisible stroke so the thin curves are actually hoverable. */
+  .bl-hit {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 16;
+    cursor: pointer;
+  }
+
+  .bl-curve {
+    outline: none;
+  }
+
+  .bl-line,
+  .bl-label {
+    transition: stroke-width 0.2s ease, font-weight 0.2s ease;
+  }
+
+  .bl-label {
+    font-family: var(--system-stack);
+  }
+
+  /* Hovering a hint in the prose, or the curve itself, fades the other curve.
+     Both routes drive the same pair of rules so they stay consistent. */
   .figure-group:has(.hint[data-cr="old"]:hover) .bl-curve[data-curve="new"],
-  .figure-group:has(.hint[data-cr="new"]:hover) .bl-curve[data-curve="old"] {
+  .figure-group:has(.hint[data-cr="new"]:hover) .bl-curve[data-curve="old"],
+  .diagram:has(.bl-curve[data-curve="old"]:hover) .bl-curve[data-curve="new"],
+  .diagram:has(.bl-curve[data-curve="new"]:hover) .bl-curve[data-curve="old"],
+  .diagram:has(.bl-curve[data-curve="old"]:focus-visible) .bl-curve[data-curve="new"],
+  .diagram:has(.bl-curve[data-curve="new"]:focus-visible) .bl-curve[data-curve="old"] {
     opacity: 0.18;
+  }
+
+  /* And thickens the one you are pointing at. */
+  .bl-curve:hover .bl-line,
+  .bl-curve:focus-visible .bl-line {
+    stroke-width: 3.2;
+  }
+
+  .bl-curve:hover .bl-label,
+  .bl-curve:focus-visible .bl-label {
+    font-weight: 600;
   }
 }

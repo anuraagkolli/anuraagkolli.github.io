@@ -23,8 +23,13 @@ export type Detail = {
  * `href` renders as a link to the page carrying its `detail`.
  */
 export type Entry = {
+  /** Middle column, the line that carries the weight. */
   name: string
+  /** Right column, small and gray: the context the name does not say. */
+  tag?: string
+  /** Extra middle lines. Only the education row still uses these. */
   lines: string[]
+  /** Left column. */
   dates: string[]
   href?: string
   /** Keep the lead line on one line at sm and up. */
@@ -55,8 +60,9 @@ export const social: (Link & { tip: string })[] = [
 
 export const work: Entry[] = [
   {
-    name: "Kleiner Perkins",
-    lines: ["2026 Engineering Fellow, placed at Inkitt"],
+    name: "kp fellow",
+    tag: "@ inkitt",
+    lines: [],
     dates: ["2026"],
     href: "/kleiner-perkins/",
     detail: {
@@ -71,8 +77,9 @@ export const work: Entry[] = [
     },
   },
   {
-    name: "Mercor",
-    lines: ["EPM, frontier model evaluation"],
+    name: "mercor",
+    tag: "epm",
+    lines: [],
     dates: ["2026"],
     href: "/mercor/",
     detail: {
@@ -87,8 +94,9 @@ export const work: Entry[] = [
     },
   },
   {
-    name: "Toyota",
-    lines: ["Software Engineer Intern"],
+    name: "toyota",
+    tag: "swe intern",
+    lines: [],
     dates: ["2025"],
     href: "/toyota/",
     detail: {
@@ -107,9 +115,8 @@ export const work: Entry[] = [
 export const projects: Entry[] = [
   {
     name: "Invariance",
-    lines: ["Governed AI turning a prompt into a live multi-tenant re-theme"],
+    lines: [],
     dates: ["2026"],
-    href: "/projects/",
     detail: {
       title: "Invariance",
       meta: "AI-governed UI customization - May 2026",
@@ -123,9 +130,8 @@ export const projects: Entry[] = [
   },
   {
     name: "BriefCase",
-    lines: ["Chain-of-thought distillation for legal contract risk classification"],
+    lines: [],
     dates: ["2026"],
-    href: "/projects/",
     detail: {
       title: "BriefCase",
       meta: "Chain-of-thought distillation for legal contract risk classification - Purdue CS490, 2026",
@@ -141,9 +147,8 @@ export const projects: Entry[] = [
   },
   {
     name: "GARCH BTC",
-    lines: ["Hybrid GARCH plus LSTM/Transformer volatility forecasting"],
+    lines: [],
     dates: ["2025"],
-    href: "/projects/",
     detail: {
       title: "GARCH BTC",
       meta: "Bitcoin volatility forecasting - 2025",
@@ -156,10 +161,20 @@ export const projects: Entry[] = [
   },
 ]
 
+/** The one home row that stands in for the whole projects page. */
+export const builds: Entry = {
+  name: "things i've built",
+  tag: "projects",
+  lines: [],
+  dates: ["2025-26"],
+  href: "/projects/",
+}
+
 export const education: Entry[] = [
   {
     name: "Purdue University",
-    lines: ["B.S. Artificial Intelligence & Computer Science"],
+    tag: "b.s. ai & cs",
+    lines: [],
     dates: ["Dec 2026"],
     nowrap: true,
   },

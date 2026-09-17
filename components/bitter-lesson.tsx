@@ -32,24 +32,36 @@ export default function BitterLesson() {
       {/* the gap the bitter lesson opens, once general methods pull ahead */}
       <path d="M292.2 74.3 L292.3 74.3 L295.5 72.2 L298.7 70.2 L301.9 68.1 L305.1 66.1 L308.4 64.1 L311.6 62.1 L314.8 60.1 L318.0 58.1 L321.3 56.1 L324.5 54.2 L327.7 52.2 L330.9 50.3 L334.1 48.4 L337.4 46.6 L340.6 44.7 L343.8 42.9 L347.0 41.1 L350.2 39.3 L353.4 37.6 L356.5 35.9 L359.7 34.2 L362.9 32.6 L366.0 31.0 L369.1 29.4 L372.3 27.9 L375.4 26.4 L378.5 25.0 L381.6 23.6 L384.6 22.2 L387.7 20.9 L390.7 19.6 L393.7 18.4 L396.7 17.2 L399.7 16.1 L400.0 16.0 L400.0 73.0 L393.1 73.0 L386.3 73.1 L379.6 73.2 L373.0 73.2 L366.5 73.3 L360.1 73.3 L353.8 73.4 L347.5 73.4 L341.4 73.5 L335.3 73.6 L329.3 73.7 L323.5 73.7 L317.7 73.8 L312.0 73.9 L306.3 74.0 L300.8 74.1 L295.3 74.2 L292.4 74.3 Z" fill="url(#bl-hatch)" opacity="0.75" />
 
-      <g className="bl-curve" data-curve="old">
+      <g className="bl-curve" data-curve="old" tabIndex={0} role="button"
+         aria-label="Highlight the hand-coded knowledge curve">
+        <path className="bl-hit" d="M42 178 C 70 176 94 110 132 94 C 178 75 260 74 400 73" />
         <path
+          className="bl-line"
           d="M42 178 C 70 176 94 110 132 94 C 178 75 260 74 400 73"
           fill="none"
           stroke="#a79d90"
           strokeWidth="1.8"
           strokeLinecap="round"
         />
+        <text className="bl-label" x="140" y="58" fill="#a79d90" fontSize="10.5" dominantBaseline="middle">
+          hand-coded knowledge
+        </text>
       </g>
 
-      <g className="bl-curve" data-curve="new">
+      <g className="bl-curve" data-curve="new" tabIndex={0} role="button"
+         aria-label="Highlight the search and learning curve">
+        <path className="bl-hit" d="M42 178 C 108 176 164 156 212 126 C 268 92 340 38 400 16" />
         <path
+          className="bl-line"
           d="M42 178 C 108 176 164 156 212 126 C 268 92 340 38 400 16"
           fill="none"
           stroke="#5d5751"
           strokeWidth="2.2"
           strokeLinecap="round"
         />
+        <text className="bl-label" x="252" y="32" fill="#5d5751" fontSize="10.5" fontWeight={500} dominantBaseline="middle">
+          search + learning
+        </text>
       </g>
 
       <g>
@@ -58,12 +70,6 @@ export default function BitterLesson() {
       </g>
 
       <g fontFamily="var(--system-stack)" fontSize="10.5" dominantBaseline="middle">
-        <text x="140" y="58" fill="#a79d90">
-          hand-coded knowledge
-        </text>
-        <text x="252" y="32" fill="#5d5751" fontWeight={500}>
-          search + learning
-        </text>
         <text x="205" y="192" fill="#b3a99c">
           compute
         </text>

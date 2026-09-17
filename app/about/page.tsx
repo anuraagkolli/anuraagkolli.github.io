@@ -25,7 +25,7 @@ export default function Page() {
           ))}
 
           <SectionHeading id="education">Education</SectionHeading>
-          <EntryList entries={education} cols="sm:grid-cols-[150px_1fr_auto]" />
+          <EntryList entries={education} cols="sm:grid-cols-[90px_1fr_auto]" />
 
           <SectionHeading id="skills">Skills</SectionHeading>
           <Skills />

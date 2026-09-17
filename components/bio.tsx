@@ -5,9 +5,7 @@ export default function Bio() {
     <div className="figure-group">
       <p style={{ lineHeight: 1.6 }}>
         I&apos;m a 2026 Kleiner Perkins Fellow studying artificial intelligence and computer science
-        at Purdue. I like the parts nobody demos: the eval harness, the retraining schedule, the
-        guardrail that catches the model before a user does. The work below is where that has led
-        so far.
+        at Purdue.
       </p>
 
       <figure className="my-6 flex justify-center">

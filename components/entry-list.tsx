@@ -23,7 +23,7 @@ function RowBody({ entry }: { entry: Entry }) {
         ))}
       </span>
 
-      <span className="hidden whitespace-nowrap text-right font-mono text-gray-400 sm:block sm:col-start-3">
+      <span className="hidden whitespace-nowrap text-right text-gray-400 sm:block sm:col-start-3">
         {entry.tag}
       </span>
 
@@ -31,7 +31,7 @@ function RowBody({ entry }: { entry: Entry }) {
         <div className="flex items-baseline gap-3">
           <span className="tabular-nums text-gray-400">{entry.dates[0]}</span>
           <span className="leader" aria-hidden="true" />
-          <span className="whitespace-nowrap font-mono text-gray-400">{entry.tag}</span>
+          <span className="whitespace-nowrap text-gray-400">{entry.tag}</span>
         </div>
         <div className="row-name pt-1">{entry.name}</div>
         {entry.lines.map((line) => (

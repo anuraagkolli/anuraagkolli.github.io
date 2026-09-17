@@ -42,9 +42,12 @@
     transform: translateY(-0.28em);
   }
 
+  /* Chrome used to be sans at 15px against serif body prose. The mismatch read
+     as two different pages stitched together, so it now matches the prose
+     exactly: same family, same size. Hierarchy comes from color, not font. */
   .ui {
-    font-family: var(--system-stack);
-    font-size: 15px;
+    font-family: var(--prose-stack);
+    font-size: 16px;
   }
 
   .row {
@@ -53,9 +56,7 @@
 
   /* The name is the line that carries a row; the date and tag stay quiet. */
   .row-name {
-    font-size: 19px;
     line-height: 1.3;
-    letter-spacing: -0.01em;
     color: var(--offblack);
   }
 

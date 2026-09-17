@@ -15,7 +15,9 @@ const config = {
         accent: "var(--accent)",
       },
       fontFamily: {
-        ui: ["var(--system-stack)"],
+        // The site is set in one typeface. `ui` stays as a named role for
+        // titles so the distinction survives if the faces ever diverge again.
+        ui: ["var(--prose-stack)"],
         prose: ["var(--prose-stack)"],
       },
     },

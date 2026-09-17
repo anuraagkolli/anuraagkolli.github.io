@@ -2,13 +2,14 @@ import Link from "next/link"
 import SectionHeading from "@/components/section-heading"
 import SiteHeader from "@/components/site-header"
 import { projects } from "@/lib/content"
+import { pageMetadata } from "@/lib/metadata"
 
-export const metadata = { title: "Projects - Anuraag Kolli" }
+export const metadata = pageMetadata("/projects/", "Projects", "Invariance, BriefCase, and GARCH BTC - machine learning and infrastructure projects by Anuraag Kolli.")
 
 export default function Page() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader current="/projects/" />
       <div className="pb-48">
         <main className="m-auto w-full max-w-[640px] px-5">
           <Link href="/" className="ui prose-link text-gray-500">

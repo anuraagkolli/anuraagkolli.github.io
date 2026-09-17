@@ -2,7 +2,7 @@ import Link from "next/link"
 import { icons } from "@/components/icons"
 import { nav, profile, social } from "@/lib/content"
 
-export default function SiteHeader() {
+export default function SiteHeader({ current }: { current?: string } = {}) {
   return (
     <div className="relative m-auto mb-8 mt-16 w-full max-w-[640px] items-start px-5">
       <h1
@@ -16,7 +16,12 @@ export default function SiteHeader() {
       <div className="pt-2 text-gray-500">{profile.tagline}</div>
       <nav className="ui flex gap-4 pt-3 text-gray-500">
         {nav.map(({ label, href }) => (
-          <Link key={label} href={href} className="prose-link">
+          <Link
+            key={label}
+            href={href}
+            className="prose-link"
+            aria-current={href === current ? "page" : undefined}
+          >
             {label}
           </Link>
         ))}

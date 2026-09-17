@@ -39,7 +39,6 @@ function RowBody({ entry }: { entry: Entry }) {
             {line}
           </span>
         ))}
-        {entry.links && <Links entry={entry} suppressed={Boolean(entry.href)} />}
       </span>
 
       <span
@@ -64,29 +63,9 @@ function RowBody({ entry }: { entry: Entry }) {
               {line}
             </span>
           ))}
-          {entry.links && <Links entry={entry} suppressed={Boolean(entry.href)} />}
         </div>
       </div>
     </>
-  )
-}
-
-function Links({ entry, suppressed }: { entry: Entry; suppressed?: boolean }) {
-  if (suppressed) return null
-  return (
-    <span className="flex gap-x-4 pt-1">
-      {entry.links?.map((link) => (
-        <a
-          key={link.label}
-          className="prose-link text-gray-500"
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {link.label}
-        </a>
-      ))}
-    </span>
   )
 }
 

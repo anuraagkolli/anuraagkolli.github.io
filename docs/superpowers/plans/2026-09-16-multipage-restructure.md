@@ -924,7 +924,10 @@ grep -q "Selected work" out/index.html && echo "ok: work section"
 grep -q "Projects" out/index.html && echo "ok: projects section"
 grep -q "Skills" out/index.html && echo "FAIL: skills still on home" || echo "ok: skills moved off home"
 grep -q "Purdue University" out/index.html && echo "FAIL: education still on home" || echo "ok: education moved off home"
-grep -q "Inkitt" out/index.html && echo "FAIL: Inkitt still on home" || echo "ok: Inkitt off home"
+grep -qE "revenue prediction|recommendation engine|pLTV|Galatea|CandyJar" out/index.html \
+  && echo "FAIL: Inkitt narrative still on home" || echo "ok: Inkitt narrative off home"
+grep -q "placed at Inkitt" out/index.html \
+  && echo "ok: KP row still points at Inkitt as context" || echo "FAIL: row subtitle lost"
 ```
 
 Expected: build passes, then six `ok:` lines and no `FAIL:`.

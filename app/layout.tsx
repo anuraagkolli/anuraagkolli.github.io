@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Source_Serif_4 } from "next/font/google"
 import "./globals.css"
+import { SITE } from "@/lib/metadata"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-serif" })
@@ -9,7 +10,7 @@ const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-serif" })
 const title = "Anuraag Kolli"
 const description =
   "Anuraag Kolli builds machine learning systems that survive contact with production. 2026 Kleiner Perkins Engineering Fellow, studying AI and computer science at Purdue."
-const url = "https://anuraagkolli.github.io"
+const url = SITE
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),

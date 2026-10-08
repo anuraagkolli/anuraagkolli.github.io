@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-const SITE = "https://anuraagkolli.github.io"
+export const SITE = "https://anuraagkolli.dev"
 
 /**
  * Per-route metadata. Without this every page inherits the root canonical and

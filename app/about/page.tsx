@@ -1,4 +1,3 @@
-import Link from "next/link"
 import EntryList from "@/components/entry-list"
 import SectionHeading from "@/components/section-heading"
 import SiteHeader from "@/components/site-header"
@@ -14,12 +13,8 @@ export default function Page() {
       <SiteHeader current="/about/" />
       <div className="pb-48">
         <main className="m-auto w-full max-w-[640px] px-5">
-          <Link href="/" className="ui prose-link text-gray-500">
-            back
-          </Link>
-
           {aboutBio.map((paragraph, i) => (
-            <p key={i} className="pt-5" style={{ lineHeight: 1.6 }}>
+            <p key={i} className="pt-5 first:pt-0" style={{ lineHeight: 1.6 }}>
               {paragraph}
             </p>
           ))}

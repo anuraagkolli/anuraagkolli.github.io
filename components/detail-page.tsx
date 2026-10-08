@@ -1,10 +1,9 @@
-import Link from "next/link"
 import SiteHeader from "@/components/site-header"
 import type { Detail } from "@/lib/content"
 
 /**
- * The shared shell for every detail route: site header, a back link, the
- * entry's title and meta line, then its body paragraphs. Routes pass data
+ * The shared shell for every detail route: site header, the entry's title
+ * and meta line, then its body paragraphs. Routes pass data
  * only, so all detail pages stay identical by construction.
  */
 export default function DetailPage({ detail }: { detail: Detail }) {
@@ -13,12 +12,8 @@ export default function DetailPage({ detail }: { detail: Detail }) {
       <SiteHeader />
       <div className="pb-48">
         <main className="m-auto w-full max-w-[640px] px-5">
-          <Link href="/" className="ui prose-link text-gray-500">
-            back
-          </Link>
-
           <h2
-            className="font-ui pt-8"
+            className="font-ui"
             style={{ fontWeight: 600, fontSize: 18, letterSpacing: "-0.01em" }}
           >
             {detail.title}

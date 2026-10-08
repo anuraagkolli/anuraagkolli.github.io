@@ -1,4 +1,3 @@
-import Link from "next/link"
 import SiteHeader from "@/components/site-header"
 
 export default function NotFound() {
@@ -14,11 +13,6 @@ export default function NotFound() {
             Page not found
           </h1>
           <p className="pt-2 text-gray-500">That page does not exist.</p>
-          <p className="pt-4">
-            <Link href="/" className="prose-link">
-              Back home
-            </Link>
-          </p>
         </main>
       </div>
     </>

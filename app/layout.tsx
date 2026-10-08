@@ -1,11 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Source_Serif_4 } from "next/font/google"
+import { Inter, Source_Serif_4, Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { SITE } from "@/lib/metadata"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const serif = Source_Serif_4({ subsets: ["latin"], variable: "--font-serif" })
+// Only the name in the header is set in Space Grotesk.
+const grotesk = Space_Grotesk({ subsets: ["latin"], weight: "500", variable: "--font-name" })
 
 const title = "Anuraag Kolli"
 const description =
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${serif.variable}`}>
+    <html lang="en" className={`${inter.variable} ${serif.variable} ${grotesk.variable}`}>
       <body>{children}</body>
     </html>
   )

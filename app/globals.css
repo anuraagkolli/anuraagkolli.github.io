@@ -122,6 +122,41 @@
 }
 
 @layer components {
+  /* Two faces of each cube are paper with a hairline; the third is shaded, which
+     is all it takes for the stack to read as solid. */
+  .iso-cross {
+    display: block;
+    overflow: visible;
+  }
+
+  .iso-top,
+  .iso-right {
+    fill: var(--offwhite);
+    stroke: var(--gray-500);
+    stroke-width: 0.5;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .iso-left {
+    fill: #d6cdc1;
+  }
+
+  .iso-cross use.hop {
+    animation: iso-hop 0.6s cubic-bezier(0.3, 0.7, 0.3, 1);
+  }
+
+  @keyframes iso-hop {
+    30% {
+      transform: translateY(-9px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .iso-cross use.hop {
+      animation: none;
+    }
+  }
+
   .diagram {
     display: block;
     max-width: 420px;

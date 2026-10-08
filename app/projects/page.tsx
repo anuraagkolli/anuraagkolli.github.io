@@ -1,4 +1,3 @@
-import Link from "next/link"
 import SectionHeading from "@/components/section-heading"
 import SiteHeader from "@/components/site-header"
 import { projects } from "@/lib/content"
@@ -11,11 +10,7 @@ export default function Page() {
     <>
       <SiteHeader current="/projects/" />
       <div className="pb-48">
-        <main className="m-auto w-full max-w-[640px] px-5">
-          <Link href="/" className="ui prose-link text-gray-500">
-            back
-          </Link>
-
+        <main className="m-auto w-full max-w-[640px] px-5 [&>section:first-child>h2]:pt-0">
           {projects.map((entry) => {
             const detail = entry.detail!
             return (
